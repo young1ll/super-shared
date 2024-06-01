@@ -1,0 +1,51 @@
+{
+    "name": "shared",
+    "version": "0.0.1",
+    "description": "",
+    "author": "",
+    "keywords": [],
+    "main": "index.js",
+    "types": "./src/index.d.ts",
+    "scripts": {
+        "build": "npm run build:cjs && npm run build:esm && tsc --outDir build/src && node scripts/build-package.js",
+        "build:cjs": "NODE_ENV=production BABEL_ENV=cjs babel src --presets=./scripts/babel-preset.js --extensions .ts,.tsx --ignore src/**/*.specs.tsx --out-dir build/cjs --source-maps",
+        "build:esm": "NODE_ENV=production BABEL_ENV=esm babel src --presets=./scripts/babel-preset.js --extensions .ts,.tsx --ignore src/**/*.specs.tsx --out-dir build/esm --source-maps"
+    },
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com/"
+    },
+    "files": [
+        "build",
+        "src"
+    ],
+    "exports": {
+        ".": {
+            "import": "./src/index.js",
+            "require": "./src/index.js"
+        }
+    },
+    "license": "ISC",
+    "dependencies": {
+        "@elastic/elasticsearch": "^8.13.1",
+        "cloudinary": "^2.2.0",
+        "express": "^4.19.2",
+        "http-status-codes": "^2.3.0",
+        "jsonwebtoken": "^9.0.2",
+        "mongoose": "^8.4.1",
+        "typescript": "^5.4.5",
+        "winston": "^3.13.0",
+        "winston-elasticsearch": "^0.19.0"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.24.6",
+        "@babel/preset-env": "^7.24.6",
+        "@babel/preset-typescript": "^7.24.6",
+        "@types/express": "^4.17.21",
+        "@types/jsonwebtoken": "^9.0.6",
+        "cross-env": "^7.0.3"
+    }
+}
